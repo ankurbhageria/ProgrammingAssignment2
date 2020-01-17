@@ -1,15 +1,36 @@
-## Put comments here that give an overall description of what your
-## functions do
 
-## Write a short comment describing this function
+#R Assignment - Coursera
+#Computing the inverse of a matrix is a computationally intensive task. Therefore, we build a function that creates a "matrix"
+#object and calculate the inverse using caching.
+  
+# makeCacheMatrix function uses a matrix object for caching the inverse
+  
+  makeCacheMatrix <- function(x = matrix()) {
+    inv <- NULL
+    set <- function(y) {
+      x <<- y
+      inv <<- NULL
+    }
+    get <- function() x
+    setInverse <- function(inverse) inv <<- inverse
+    getInverse <- function() inv
+    list(set = set,
+         get = get,
+         setInverse = setInverse,
+         getInverse = getInverse)
+  }
 
-makeCacheMatrix <- function(x = matrix()) {
 
-}
-
-
-## Write a short comment describing this function
+# cacheSolve function extracts the inverse matrix from the cache
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+  inv <- x$getInverse()
+  if (!is.null(inv)) {
+    message("Retrive data from cache")
+    return(inv)
+  }
+  mat <- x$get()
+  inv <- solve(mat, ...)
+  x$setInverse(inv)
+  inv
 }
