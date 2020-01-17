@@ -26,7 +26,7 @@
 cacheSolve <- function(x, ...) {
   inv <- x$getInverse()
   if (!is.null(inv)) {
-    message("Retrive data from cache")
+    message("Retrive data from the cache")
     return(inv)
   }
   mat <- x$get()
